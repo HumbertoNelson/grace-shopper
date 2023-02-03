@@ -1,15 +1,18 @@
-const conn = require('./conn');
-const User = require('./User');
-const Product = require('./Product');
-const Order = require('./Order');
-const LineItem  = require('./LineItem');
+const conn = require("./conn");
+const User = require("./User");
+const Product = require("./Product");
+const Order = require("./Order");
+const LineItem = require("./LineItem");
+const Review = require("./Review");
 
 Order.belongsTo(User);
 LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
+Review.belongsTo(Product);
+Product.hasMany(Review);
 
-const syncAndSeed = async()=> {
+const syncAndSeed = async () => {
   await conn.sync({ force: true });
   const [matt, gary, humberto, bedTwin, bedQueen, chairGaming, chairOffice, sofaSectional, sofaLoveseat, deskStanding, deskRegular, antonia] = await Promise.all([
     User.create({ username: 'matt', password: '123' }),
@@ -49,9 +52,8 @@ const syncAndSeed = async()=> {
   };
 };
 
-
 module.exports = {
   syncAndSeed,
   User,
-  Product
+  Product,
 };
