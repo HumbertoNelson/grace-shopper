@@ -29,9 +29,24 @@ const syncAndSeed = async () => {
     User.create({ username: 'antonia', password: '123' }),
   ]);
 
-  const cart = await antonia.getCart();
+  await gary.getCart();
+  await gary.addToCart({ product: chairOffice, quantity: 3});
+  await gary.addToCart({ product: bedQueen, quantity: 1});
+  await gary.createOrder();
+
+  await gary.getCart();
+  await gary.addToCart({ product: sofaSectional, quantity: 1});
+  await gary.addToCart({ product: deskStanding, quantity: 1});
+  await gary.createOrder();
+
+  await gary.getCart();
+  await gary.addToCart({ product: chairGaming, quantity: 2});
+  await gary.addToCart({ product: bedTwin, quantity: 2});
+
+  await antonia.getCart();
   await antonia.addToCart({ product: chairOffice, quantity: 3});
   await antonia.addToCart({ product: bedQueen, quantity: 1});
+  
   return {
     users: {
       matt,
