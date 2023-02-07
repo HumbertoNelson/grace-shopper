@@ -3,9 +3,10 @@ import Home from './Home';
 import Login from './Login';
 import Cart from './Cart';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchCart } from '../store';
+import { loginWithToken, fetchCart, fetchOrders } from '../store';
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 import Register from './Register';
+import Orders from './Orders';
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -18,6 +19,7 @@ const App = () => {
   useEffect(() => {
     if (auth.id) {
       dispatch(fetchCart());
+      dispatch(fetchOrders());
     }
   }, [auth]);
   
@@ -26,12 +28,14 @@ const App = () => {
       <h1>Grace Shopper</h1>
       <nav>
         <Link to="/">Home</Link>
+        { auth.id ? <Link to="/orders">Orders</Link> : '' }
         <Link to="/cart">Cart</Link>
       </nav>
       <Routes>
         <Route path="/" element={ auth.id ? <Home /> : <Login />} />
         <Route path="/register" element={ auth.id ? <Navigate to="/" /> : <Register />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/orders" element={ auth.id ? <Orders /> : <Login />} />
+        <Route path="/cart" element={ <Cart /> } />
       </Routes>
     </div>
   );
