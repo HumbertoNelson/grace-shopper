@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const auth = (state = {}, action)=> {
+const auth = (state = {}, action) => {
   if (action.type === 'SET_AUTH' || action.type === 'UPDATE_PROFILE') {
     return action.auth;
   }
@@ -13,7 +13,7 @@ export const logout = () => {
 };
 
 export const loginWithToken = () => {
-  return async(dispatch)=> {
+  return async(dispatch) => {
     const token = window.localStorage.getItem('token');
     if(token){
       const response = await axios.get('/api/auth', {
@@ -27,7 +27,7 @@ export const loginWithToken = () => {
 };
 
 export const attemptLogin = (credentials) => {
-  return async(dispatch)=> {
+  return async(dispatch) => {
     const response = await axios.post('/api/auth', credentials);
     window.localStorage.setItem('token', response.data);
     dispatch(loginWithToken());
@@ -50,7 +50,10 @@ export const updateProfile = (profile) => {
         authorization: token
       }
     });
-    dispatch({ type: 'UPDATE_PROFILE', auth: response.data });
+    dispatch({ 
+      type: 'UPDATE_PROFILE',
+      auth: { ...response.data, message: 'Profile successfully updated.' },
+    });
   };
 };
 

@@ -12,6 +12,7 @@ const ProfileForm = ()=> {
     lastName: '',
     bio: '',
   });
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (auth) {
@@ -25,13 +26,16 @@ const ProfileForm = ()=> {
     }
   }, [auth]);
 
-  // useEffect(() => {
-  //   console.log(profile.updatedAt);
-  // }, [profile.updatedAt]);
+  useEffect(() => {
+    if (auth.message) {
+      setMessage(auth.message);
+    }
+  }, [auth]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
+    setMessage('');
   }
   
   const handleSubmit = () => {
@@ -74,6 +78,9 @@ const ProfileForm = ()=> {
       <button onClick={handleSubmit}>
         Submit
       </button>
+      <div>
+        {message}
+      </div>
     </div>
   );
 };
