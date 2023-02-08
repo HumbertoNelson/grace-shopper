@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile } from '../store/profile';
+import { updateProfile } from '../store/auth';
 
 const ProfileForm = ()=> {
-  const { profile } = useSelector(state => state);
+  const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     username: '',
@@ -14,16 +14,20 @@ const ProfileForm = ()=> {
   });
 
   useEffect(() => {
-    if (profile) {
+    if (auth) {
       setInputs({
-        username: profile.username,
-        password: profile.password,
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        bio: profile.bio,
+        username: auth.username,
+        password: auth.password,
+        firstName: auth.firstName,
+        lastName: auth.lastName,
+        bio: auth.bio,
       });
     }
-  }, [profile]);
+  }, [auth]);
+
+  // useEffect(() => {
+  //   console.log(profile.updatedAt);
+  // }, [profile.updatedAt]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

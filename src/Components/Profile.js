@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import ProfileForm from './ProfileForm';
 
 const Profile = ()=> {
-  const { profile } = useSelector(state => state);
+  const { auth } = useSelector(state => state);
 
   return (
     <>
@@ -11,7 +11,7 @@ const Profile = ()=> {
         <h1>Profile</h1>
         <pre>
           {
-            JSON.stringify(profile, null, 2)
+            JSON.stringify(auth, null, 2)
           }
         </pre>
       </div>

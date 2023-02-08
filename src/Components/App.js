@@ -21,7 +21,6 @@ const App = () => {
     if (auth.id) {
       dispatch(fetchCart());
       dispatch(fetchOrders());
-      dispatch(fetchProfile());
     }
   }, [auth]);
   

@@ -28,7 +28,7 @@ app.post('/', async(req, res, next)=> {
   }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/user", async (req, res) => {
   try {
     const token = await User.encryptUser(req.body);
     res.json(token);
@@ -38,5 +38,16 @@ app.post("/register", async (req, res) => {
       message: "Could not register user",
       error: err.message,
     });
+  }
+});
+
+app.put('/user', async(req, res, next)=> {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    await user.update(req.body);
+    res.json(user);
+  }
+  catch(ex){
+    next(ex);
   }
 });
