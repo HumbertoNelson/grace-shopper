@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, UUID, UUIDV4 } = conn.Sequelize;
+const { STRING, TEXT, UUID, UUIDV4 } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT } = process.env;
@@ -24,6 +24,18 @@ const User = conn.define('user', {
     validate: {
       notEmpty: true,
     },
+  },
+  firstName: {
+    type: STRING,
+    allowNull: true,
+  },
+  lastName: {
+    type: STRING,
+    allowNull: true,
+  },
+  bio: {
+    type: TEXT,
+    allowNull: true,
   },
 });
 
@@ -58,6 +70,23 @@ User.prototype.getCart = async function () {
   });
 
   return cart;
+};
+
+User.prototype.getOrders = async function() {
+  const orders = await conn.models.order.findAll({
+    where: {
+      userId: this.id,
+      isCart: false,
+    },
+    include: [
+      {
+        model: conn.models.lineItem,
+        include: [conn.models.product],
+      },
+    ],
+  });
+
+  return orders;
 };
 
 User.prototype.addToCart = async function ({ product, quantity }) {

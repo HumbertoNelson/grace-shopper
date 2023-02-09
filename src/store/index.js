@@ -5,11 +5,13 @@ import auth from './auth';
 import cart from './cart';
 import  products  from './allProducts';
 import AllProducts from '../Components/AllProducts';
+import orders from './orders';
 
 const reducer = combineReducers({
   auth,
   cart,
-  products
+  products,
+  orders,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -19,3 +21,4 @@ export default store;
 export * from './auth';
 export * from './cart';
 export * from './allProducts'
+export * from './orders';
