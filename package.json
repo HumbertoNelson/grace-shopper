@@ -1,6 +1,6 @@
 {
   "name": "acme-shopping-2207-fsa-pt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "proxy": "http://localhost:3000",
