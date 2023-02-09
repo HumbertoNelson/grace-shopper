@@ -8,6 +8,7 @@ import { Link, Routes, Route, Navigate } from 'react-router-dom';
 import Register from './Register';
 import Orders from './Orders';
 import Profile from './Profile';
+import Review from "./reviewForm";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -23,7 +24,7 @@ const App = () => {
       dispatch(fetchOrders());
     }
   }, [auth]);
-  
+
   return (
     <div className="app">
       <h1>Grace Shopper</h1>
@@ -32,6 +33,7 @@ const App = () => {
         { auth.id ? <Link to="/orders">Orders</Link> : '' }
         { auth.id ? <Link to="/profile">Profile</Link> : '' }
         <Link to="/cart">Cart</Link>
+        <Link to="/review">Review</Link>
       </nav>
       <Routes>
         <Route path="/" element={ auth.id ? <Home /> : <Login />} />
@@ -39,6 +41,7 @@ const App = () => {
         <Route path="/register" element={ auth.id ? <Navigate to="/" /> : <Register />} />
         <Route path="/orders" element={ auth.id ? <Orders /> : <Login />} />
         <Route path="/cart" element={ <Cart /> } />
+        <Route path="/review" element={ <Review /> } />
       </Routes>
     </div>
   );

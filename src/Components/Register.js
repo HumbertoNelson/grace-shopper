@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { registerUser } from '../store';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { registerUser } from "../store";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const onChange = (ev) => {
@@ -19,9 +19,9 @@ const Register = () => {
   const register = (ev) => {
     ev.preventDefault();
     dispatch(registerUser(credentials));
-    
-    if(auth.id) {
-      navigate('/', { replace: true });
+
+    if (auth.id) {
+      navigate("/", { replace: true });
     }
   };
 

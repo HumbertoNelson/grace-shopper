@@ -11,6 +11,8 @@ Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
 Review.belongsTo(Product);
 Product.hasMany(Review);
+Review.belongsTo(User);
+User.hasMany(Review);
 
 const syncAndSeed = async () => {
   await conn.sync({ force: true });
@@ -52,7 +54,7 @@ const syncAndSeed = async () => {
       matt,
       gary,
       humberto,
-      antonia
+      antonia,
     },
     products: {
       bedTwin,
@@ -62,8 +64,8 @@ const syncAndSeed = async () => {
       sofaSectional,
       sofaLoveseat,
       deskStanding,
-      deskRegular
-    }
+      deskRegular,
+    },
   };
 };
 
