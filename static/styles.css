@@ -15,3 +15,29 @@ nav {
   display: flex;
   justify-content: space-around;
 }
+
+li {
+  list-style-type: none;
+}
+
+img {
+  max-width: 150px;
+}
+
+.cart-item {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em;
+  gap: 20px;
+  border: 1px black solid;
+  width: 40%;
+}
+
+.cart-container {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
