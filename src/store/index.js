@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import auth from './auth';
 import cart from './cart';
-import  products  from './allProducts';
+import products  from './allProducts';
 import AllProducts from '../Components/AllProducts';
 import orders from './orders';
 

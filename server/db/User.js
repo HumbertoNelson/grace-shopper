@@ -89,20 +89,20 @@ User.prototype.getOrders = async function() {
   return orders;
 };
 
-User.prototype.addToCart = async function ({ product, quantity }) {
+User.prototype.addToCart = async function (product) {
+  console.log(product)
   const cart = await this.getCart();
   const lineItem = cart.lineItems.find(
     (lineItem) => lineItem.productId === product.id
   );
-
   if (lineItem) {
-    lineItem.quantity += quantity;
+    lineItem.quantity += product.quantity;
     await lineItem.save();
   } else {
     await conn.models.lineItem.create({
       orderId: cart.id,
       productId: product.id,
-      quantity,
+      quantity: product.quantity,
     });
   }
 

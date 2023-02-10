@@ -1,11 +1,8 @@
 import axios from 'axios';
 
 const cart = (state = { lineItems: [] }, action)=> {
-  if(action.type === 'SET_CART'){
+  if(action.type === 'SET_CART' || action.type === 'REMOVE_ITEM' || action.type === 'ADD_ITEM'){
     return action.cart;
-  }
-  if(action.type === 'REMOVE_ITEM'){
-    return {...state, lineItems: state.lineItems.filter(lineItem => lineItem.productId !== action.productId)};
   }
   return state;
 };
@@ -32,6 +29,18 @@ export const removeItem = (item)=> {
       }
     });
     dispatch({ type: 'REMOVE_ITEM', cart: response.data });
+  };
+};
+
+export const addItem = (product)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.post('/api/orders/cart', {...product, quantity: 1}, {
+      headers: {
+        authorization: token
+      }
+    });
+    dispatch({ type: 'ADD_ITEM', cart: response.data });
   };
 };
 
