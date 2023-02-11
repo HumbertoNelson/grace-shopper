@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store';
-import { Link } from 'react-router-dom';
-import { removeItem } from '../store';
+import { addItem, removeItem } from '../store';
 
 const Cart = ()=> {
   const { cart } = useSelector(state => state);
@@ -26,8 +24,11 @@ const Cart = ()=> {
             <div>
               Quantity: {item.quantity}
             </div>
-            <button onClick={() => dispatch(removeItem(item))} id="deleteButton">
-              X
+            <button onClick={() => dispatch(removeItem(item.product))} id="deleteButton">
+              -
+            </button>
+            <button onClick={() => dispatch(addItem(item.product))} id="addButton">
+              +
             </button>
           </li>
         ))}
