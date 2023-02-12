@@ -2,16 +2,18 @@ import axios from "axios";
 
 const SET_REVIEW = "SET_REVIEW";
 
-export const setReview = () => {
+export const setReview = (review) => {
   return {
     type: SET_REVIEW,
     review,
   };
 };
 
-export const fetchReview = (id) => {
+// const initalState = { review: [] };
+
+export const fetchReview = () => {
   return async (dispatch) => {
-    const { data: review } = await axios.get(`/api/products/${id}/review`);
+    const { data: review } = await axios.get(`/api/products`);
     dispatch(setReview(review));
   };
 };

@@ -5,33 +5,19 @@ const Review = require("../db/Review");
 
 module.exports = app;
 
-app.get('/', async(req, res, next)=> {
+app.get("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.getOrders());
-  }
-  catch(ex){
-    next(ex);
-  }
-});
-
-app.post('/', async(req, res, next)=> {
-  try {
-    const user = await User.findByToken(req.headers.authorization);
-    res.send(await user.createOrder());
   } catch (ex) {
     next(ex);
   }
 });
 
-app.post("/products/:id/review", async (req, res, next) => {
+app.post("/", async (req, res, next) => {
   try {
-    const review = await Review.create(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.send(review);
+    const user = await User.findByToken(req.headers.authorization);
+    res.send(await user.createOrder());
   } catch (ex) {
     next(ex);
   }

@@ -1,59 +1,45 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchReview, setReview } from "../store/review";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
-// class Review extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       reviewText: "",
-//     };
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSumbit = this.handleSumbit.bind(this);
-//   }
+const ReviewForm = () => {
+  const dispatch = useDispatch();
 
-//   handleChange(e) {
-//     e.preventDefault();
-//     this.setState({ [e.target.name]: e.target.value });
-//   }
-
-//   async handleSumbit(e) {
-//     e.preventDefault();
-//     await axios.post("/products/:id/review", {
-//       reviewText: this.state.reviewText,
-//     });
-//     this.setState({ reviewText: "" });
-//   }
-
-const reviewForm = () => {
-  const [review, setReview] = useState({
-    review: "",
-  });
+  const [review, setReview] = useState({ review: "" });
 
   const onChange = (ev) => {
     setReview({ ...review, [ev.target.name]: ev.target.value });
   };
 
+  useEffect(() => {
+    const fetchReview = async () => {
+      const getReview = await axios("/api/products");
+      setReview(getReview.data);
+    };
+    fetchReview();
+  }, []);
+
   const getReview = (ev) => {
     ev.preventDefault();
     dispatch(fetchReview(review));
-
-    return (
-      <div>
-        <h2>Leave a review</h2>
-        <form onSubmit={getReview}>
-          <input
-            placeholder="Leave a Review Here"
-            value={review}
-            name="reviewText"
-            onChange={onChange}
-          />
-          <button type="submit"></button>
-        </form>
-        <Link to="/">Back to Home</Link>
-      </div>
-    );
   };
+
+  return (
+    <div>
+      <h2>Leave a review</h2>
+      <form onSubmit={getReview}>
+        <input
+          // placeholder="Leave a Review Here"
+          value={review.review}
+          name="review"
+          onChange={onChange}
+        />
+        <button type="submit">Post Review</button>
+      </form>
+    </div>
+  );
 };
 
-export default reviewForm;
+export default ReviewForm;
