@@ -17,9 +17,10 @@ const Products = () => {
       
       return (
         console.log(products),
-        <ul>
+        <ul className="product-container">
           {products.map((product) => (
-            <li key = {product.id}>{product.name}
+            <li className="product-item" key = {product.id}>{product.name}
+              <img src={product.imageURL}/>
               <p>Price: {product.price}</p>
               <p>Weight: {product.weight}</p>
               <p>Size: {product.size}</p>

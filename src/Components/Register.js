@@ -28,7 +28,7 @@ const Register = () => {
   return (
     <div>
       <h2>Create an Account</h2>
-      <form onSubmit={register}>
+      <form onSubmit={register} className='account-form'>
         <input
           placeholder="username"
           value={credentials.username}

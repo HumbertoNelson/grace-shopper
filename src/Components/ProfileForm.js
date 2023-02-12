@@ -43,7 +43,7 @@ const ProfileForm = ()=> {
   }
 
   return (
-    <div>
+    <div className="profile-form">
       <label>Username</label>
       <input
         name="username"
