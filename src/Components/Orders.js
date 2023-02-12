@@ -5,7 +5,7 @@ const Orders = ()=> {
   const { orders } = useSelector(state => state);
 
   return (
-    <div>
+    <div className='orders'>
       <h1>Previous Orders</h1>
       <pre>
         {

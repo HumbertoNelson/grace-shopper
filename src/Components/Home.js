@@ -6,7 +6,7 @@ const Home = ()=> {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className='home-page'>
       <h1>Home</h1>
       <div>
         Welcome { auth.username }!!
