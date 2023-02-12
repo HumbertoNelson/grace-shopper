@@ -1,11 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-import { Link } from 'react-router-dom'
 import { addItem } from '../store';
 import { fetchProducts } from '../store';
-
-
 
 const Products = () => {
     const { products } = useSelector(state => state);
@@ -34,7 +30,3 @@ const Products = () => {
     }
 
 export default Products;
-
-
-
-

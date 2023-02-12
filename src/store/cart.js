@@ -1,15 +1,18 @@
 import axios from 'axios';
 
-const cart = (state = { lineItems: [] }, action)=> {
-  if(action.type === 'SET_CART' || action.type === 'REMOVE_ITEM' || action.type === 'ADD_ITEM'){
+const cart = (state = { lineItems: [] }, action) => {
+  if (action.type === 'SET_CART') {
     return action.cart;
+  }
+  if (action.type === 'ADD_ITEM' || action.type === 'REMOVE_ITEM') {
+    return { ...state, lineItems: action.cart.lineItems.sort((a,b) => a.createdAt.localeCompare(b.createdAt)) }
   }
   return state;
 };
 
 
-export const fetchCart = ()=> {
-  return async(dispatch)=> {
+export const fetchCart = () => {
+  return async(dispatch) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.get('/api/orders/cart', {
       headers: {
@@ -20,20 +23,8 @@ export const fetchCart = ()=> {
   };
 };
 
-export const removeItem = (item)=> {
-  return async(dispatch)=> {
-    const token = window.localStorage.getItem('token');
-    const response = await axios.put('/api/orders/cart', {...item, quantity: 1}, {
-      headers: {
-        authorization: token
-      }
-    });
-    dispatch({ type: 'REMOVE_ITEM', cart: response.data });
-  };
-};
-
-export const addItem = (product)=> {
-  return async(dispatch)=> {
+export const addItem = (product) => {
+  return async(dispatch) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.post('/api/orders/cart', {...product, quantity: 1}, {
       headers: {
@@ -44,5 +35,16 @@ export const addItem = (product)=> {
   };
 };
 
+export const removeItem = (product) => {
+  return async(dispatch) => {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.put('/api/orders/cart', {...product, quantity: 1}, {
+      headers: {
+        authorization: token
+      }
+    });
+    dispatch({ type: 'REMOVE_ITEM', cart: response.data });
+  };
+};
 
 export default cart;
