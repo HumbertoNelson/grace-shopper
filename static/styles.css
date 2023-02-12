@@ -14,6 +14,9 @@ form > * {
 nav {
   display: flex;
   justify-content: space-around;
+  border: 1px solid black;
+  padding: 5px;
+  background-color: rgb(235, 179, 73);
 }
 
 li {
@@ -22,17 +25,19 @@ li {
 
 img {
   max-width: 150px;
+  max-height: 150px;
 }
 
 .cart-item {
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-between;
   align-items: center;
   margin: 1em;
   gap: 20px;
   border: 1px black solid;
   width: 40%;
+  padding: 20px;
+  height: 150px;
 }
 
 .cart-container {
@@ -40,4 +45,38 @@ img {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em;
+  border: 1px black solid;
+  padding: 20px;
+  width: 80%;
+  height: 150px;
+  font-size: small;
+}
+
+.product-container {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.profile-form {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border-radius: 5px;
+  width: 60%
+}
+
+.account-form {
+  width: 30%;
+  border: 2px dashed gray;
 }
