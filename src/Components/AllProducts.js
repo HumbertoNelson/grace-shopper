@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../store';
 import { fetchProducts } from '../store';
+
+
 
 const Products = () => {
     const { products } = useSelector(state => state);
@@ -13,10 +15,9 @@ const Products = () => {
       
       return (
         console.log(products),
-        <ul className="product-container">
+        <ul className='product-container'>
           {products.map((product) => (
-            <li className="product-item" key = {product.id}>{product.name}
-              <img src={product.imageURL}/>
+            <li className='product-item'key = {product.id}>{product.name}
               <p>Price: {product.price}</p>
               <p>Weight: {product.weight}</p>
               <p>Size: {product.size}</p>
@@ -30,3 +31,7 @@ const Products = () => {
     }
 
 export default Products;
+
+
+
+
