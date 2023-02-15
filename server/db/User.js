@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, TEXT, UUID, UUIDV4 } = conn.Sequelize;
+const { STRING, TEXT, UUID, UUIDV4, BOOLEAN } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT } = process.env;
@@ -37,6 +37,11 @@ const User = conn.define('user', {
     type: TEXT,
     allowNull: true,
   },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
+    allowNull: false
+  }
 });
 
 User.prototype.createOrder = async function () {
