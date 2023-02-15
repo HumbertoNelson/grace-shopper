@@ -14,4 +14,16 @@ app.get('/', async(req, res, next)=> {
   }
 });
 
-module.exports = app;
+  app.post('/', async(req, res, next) => {
+    try{
+      const product = await Product.create(req.body);
+      res.status(201).json(product);
+    } catch (err) {
+      res.status(500).json({
+        message: "Could not create product",
+        error: err.message,
+      });
+    }
+  });
+
+  module.exports = app;
