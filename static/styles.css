@@ -1,5 +1,7 @@
+
 body {
-  font-family: verdana;
+  font-family: sans-serif;
+  background-color: whitesmoke
 }
 
 form {
@@ -16,12 +18,13 @@ nav {
   justify-content: space-around;
   border: 1px solid black;
   padding: 5px;
-  background-color: rgb(235, 179, 73);
+  background-color:lightslategray
 }
 
 li {
   list-style-type: none;
 }
+
 
 img {
   max-width: 150px;
@@ -47,24 +50,29 @@ img {
   align-items: flex-start;
 }
 
+
 .product-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: inline;
+  text-align: center;
   margin: 1em;
-  border: 1px black solid;
   padding: 20px;
   width: 80%;
-  height: 150px;
+  height: 100;
   font-size: small;
+ 
+}
+
+#product-name {
+  font-size: larger;
+  font-weight: bold;
 }
 
 .product-container {
-  display:flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 200px;
+  }
+
 
 .profile-form {
   border: 2px solid black;
@@ -80,3 +88,5 @@ img {
   width: 30%;
   border: 2px dashed gray;
 }
+
+

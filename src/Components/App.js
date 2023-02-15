@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Grace Shopper</h1>
+      <h1 id='website-title'>Fullstack Furniture</h1>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/products">Products</Link>

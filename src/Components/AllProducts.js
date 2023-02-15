@@ -11,18 +11,18 @@ const Products = () => {
 
     useEffect(() => {
       dispatch(fetchProducts());
-      }, [])
+      },[])
       
       return (
-        console.log(products),
         <ul className='product-container'>
           {products.map((product) => (
-            <li className='product-item'key = {product.id}>{product.name}
-              <p>Price: {product.price}</p>
-              <p>Weight: {product.weight}</p>
+            <li className='product-item'key = {product.id}>
+              <img src={product.imageURL}></img>
+              <p id='product-name'>{product.name}</p>
+              <p>Price: ${product.price}</p>
+              <p>Weight: {product.weight} Pounds</p>
               <p>Size: {product.size}</p>
               <p>Color: {product.color}</p>
-              <img src={product.imageUrl}></img>
               <button onClick={() => dispatch(addItem(product))} id='Add Button'>Add To Cart</button>
             </li>
           ))}
