@@ -4,11 +4,10 @@ const { User } = require('../db');
 
 module.exports = app;
 
-app.get('/', async(req, res, next)=> {
+app.get('/', async(req, res, next) => {
   try {
     res.send(await User.findByToken(req.headers.authorization));
-  }
-  catch (err){
+  } catch (err){
     res.status(500).json({
       message: "Could not find user",
       error: err.message,
@@ -16,13 +15,12 @@ app.get('/', async(req, res, next)=> {
   }
 });
 
-app.post('/', async(req, res, next)=> {
+app.post('/', async(req, res, next) => {
   try {
     res.send(await User.authenticate(req.body));
-  }
-  catch (err){
+  } catch (err){
     res.status(500).json({
-      message: "Could not login user",
+      message: "Could not log in user",
       error: err.message,
     });
   }
@@ -32,8 +30,7 @@ app.post("/user", async (req, res) => {
   try {
     const token = await User.encryptUser(req.body);
     res.json(token);
-  } 
-  catch (err) {
+  } catch (err) {
     res.status(500).json({
       message: "Could not register user",
       error: err.message,
@@ -41,13 +38,15 @@ app.post("/user", async (req, res) => {
   }
 });
 
-app.put('/user', async(req, res, next)=> {
+app.put('/user', async(req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     await user.update(req.body);
     res.json(user);
-  }
-  catch(ex){
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not update user",
+      error: err.message,
+    });
   }
 });
