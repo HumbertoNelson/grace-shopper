@@ -18,15 +18,15 @@ const ReviewForm = () => {
 
   const onSumbit = (ev) => {
     ev.preventDefault();
-    dispatch(addReview({...review, userId: auth.id, productId: id }));
+    dispatch(addReview({ ...review, userId: auth.id, productId: id }));
+    setReview({ review: '' });
   };
 
   return (
-    <div>
-      <h2>Leave a review</h2>
+    <div className="review-form">
       <form onSubmit={onSumbit}>
         <input
-          placeholder="Leave a Review Here"
+          placeholder="Leave a review"
           value={review.review}
           name="review"
           onChange={onChange}

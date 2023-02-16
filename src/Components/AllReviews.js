@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchReviews } from "../store";
-import axios from "axios";
+import React from "react";
+import { useSelector } from "react-redux";
 
-const AllReviews = (props) => {
-  //const [prevReviews, setPrevReviews] = useState([]);
-  const { id } = useParams();
-  const dispatch = useDispatch();
-
-  let reviews = [];
-  console.log(reviews);
-
-  // useEffect(() => {
-  //   dispatch(fetchReviews(id));
-  // }, []);
+const AllReviews = () => {
+  const { product } = useSelector(state => state.products);
 
   return (
     <div>
-      <ul>
-        {reviews.map((review) => (
+      <ul className="reviews-container">
+        <h3>Customer Reviews:</h3>
+        {product && product.reviews.map((review) => (
           <li key={review.id}>
             <p>{review.review}</p>
+            <hr></hr>
           </li>
         ))}
       </ul>
-      <hr></hr>
     </div>
   );
 };
