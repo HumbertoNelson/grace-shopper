@@ -4,7 +4,6 @@ import logger from "redux-logger";
 import auth from "./auth";
 import cart from "./cart";
 import products from "./products";
-import reviews from "./reviews";
 import orders from "./orders";
 
 const reducer = combineReducers({
@@ -12,7 +11,6 @@ const reducer = combineReducers({
   cart,
   products,
   orders,
-  reviews,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -23,4 +21,3 @@ export * from "./auth";
 export * from "./cart";
 export * from "./products";
 export * from "./orders";
-export * from "./reviews";

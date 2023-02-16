@@ -25,6 +25,7 @@ const App = () => {
     }
   }, [auth]);
 
+
   return (
     <div className="app">
       <h1 id='website-title'>Fullstack Furniture</h1>
