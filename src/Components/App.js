@@ -10,6 +10,7 @@ import Register from "./Register";
 import Orders from "./Orders";
 import Profile from "./Profile";
 import ReviewForm from "./ReviewForm";
+import Product from "./Product";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -41,6 +42,8 @@ const App = () => {
         <Route path="/products" element={<AllProducts />} />
 
         <Route path="/cart" element={<Cart />} />
+        <Route path="/products/:id" element={<Product />} />
+        <Route path="/products/:id/reviews" element={<Product />} />
         <Route path="/orders" element={auth.id ? <Orders /> : <Login />} />
         <Route path="/profile" element={auth.id ? <Profile /> : <Login />} />
 

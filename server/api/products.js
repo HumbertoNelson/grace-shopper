@@ -14,18 +14,33 @@ app.get("/", async (req, res, next) => {
 
 app.get("/:id", async (req, res, next) => {
   try {
-    const singleProduct = await Product.findByPk(req.params.id); //Figure out single products
+    const singleProduct = await Product.findByPk(req.params.id, {
+      include: Review,
+    });
     res.send(singleProduct);
   } catch (ex) {
     next(ex);
   }
 });
 
-app.post("/", async (req, res, next) => {
-  // Finish out this route
+//Finds all reviews for the single product
+app.get("/:id/reviews", async (req, res, next) => {
   try {
-    const review = await Review.create(req.body);
-    res.send(review);
+    const reviews = await Review.findAll({
+      where: {
+        productId: req.params.id,
+      },
+    });
+    res.send(reviews);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.post("/:id/reviews", async (req, res, next) => {
+  try {
+    const newReview = await Review.create(req.body);
+    res.send(newReview);
   } catch (ex) {
     next(ex);
   }
