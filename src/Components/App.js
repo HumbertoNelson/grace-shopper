@@ -33,14 +33,14 @@ const App = () => {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/products">Products</Link>
-        <Link to="/cart">Cart</Link>
+        { auth.id ? <Link to="/cart">Cart</Link> : ''}
         { auth.id ? <Link to="/orders">Orders</Link> : '' }
         { auth.id ? <Link to="/profile">Profile</Link> : '' }
       </nav>
       <Routes>
         <Route path="/" element={ auth.id ? <Home /> : <Login />} />
         <Route path="/products" element={<AllProducts />} />
-        <Route path="/cart" element={ <Cart /> } />
+        <Route path="/cart" element={ auth.id ? <Cart /> : <Login />} />
         <Route path="/orders" element={ auth.id ? <Orders /> : <Login />} />
         <Route path="/profile" element={ auth.id ? <Profile /> : <Login />} />
         <Route path="/register" element={ auth.id ? <Navigate to="/" /> : <Register />} />

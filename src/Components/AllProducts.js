@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../store';
 import { fetchProducts } from '../store';
 import ProductForm from './ProductForm';
-
+import { Link } from 'react-router-dom';
 
 
 const Products = () => {
@@ -25,7 +25,7 @@ const Products = () => {
               <p>Weight: {product.weight} Pounds</p>
               <p>Size: {product.size}</p>
               <p>Color: {product.color}</p>
-              <button onClick={() => dispatch(addItem(product))} id='Add Button'>Add To Cart</button>
+              { auth.id ? <button onClick={() => dispatch(addItem(product))} id='Add Button'>Add To Cart</button> : <Link to="/">Please login to add to cart</Link>}
             </li>
           ))}
         </ul>
