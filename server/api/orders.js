@@ -13,6 +13,8 @@ app.get('/', async(req, res, next) => {
       message: "Could not get orders",
       error: err.message,
     });
+  }
+});
 
 app.post('/', async(req, res, next) => {
   try {
