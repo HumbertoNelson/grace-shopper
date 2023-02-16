@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const orders = (state = {}, action)=> {
+const orders = (state = [], action)=> {
   if (action.type === 'SET_ORDERS') {
     return action.orders;
   }
