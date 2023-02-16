@@ -13,11 +13,28 @@ const Orders = ()=> {
   return (
     <div className='orders'>
       <h1>Previous Orders</h1>
-      <pre>
+      {console.log(orders.lineItems)}
+      {/* <pre>
         {
           JSON.stringify(orders, null, 2)
         }
-      </pre>
+      </pre> */}
+      <ul className="order-container">
+        {orders.map((order) => (
+          <li className="order-item" key={order.id}>
+            <div>
+              Order created on {order.createdAt.slice(0,10)} at {order.createdAt.slice(11,16)} for:
+            </div>
+            <div>
+              {order.lineItems.map((item) => (
+                <div key={item.product.id}>
+                  <div>{item.product.name} ({item.quantity})</div>
+                </div>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
