@@ -19,8 +19,8 @@ const syncAndSeed = async () => {
   const [matt, gary, humberto, antonia, bedTwin, bedQueen, chairGaming, chairOffice, sofaSectional, sofaLoveseat, deskStanding, deskRegular] = await Promise.all([
     User.create({ username: 'matt', password: '123', firstName: 'Matt', lastName: 'Giambrone', bio: 'This is the bio for Matt.' }),
     User.create({ username: 'gary', password: '123', firstName: 'Gary', lastName: 'White', bio: 'This is the bio for Gary.'  }),
-    User.create({ username: 'humberto', password: '123', firstName: 'Humberto', lastName: 'Nelson', bio: 'This is the bio for Humberto.'  }),
-    User.create({ username: 'antonia', password: '123', firstName: 'Antonia', lastName: 'Benidettino', bio: 'This is the bio for Antonia.'  }),
+    User.create({ username: 'humberto', password: '123', firstName: 'Humberto', lastName: 'Nelson', bio: 'This is the bio for Humberto.', isAdmin: true  }),
+    User.create({ username: 'antonia', password: '123', firstName: 'Antonia', lastName: 'Benidettino', bio: 'This is the bio for Antonia.', isAdmin: true  }),
     Product.create({ name: 'Twin Bed', price: 150, weight: 120, size: '76x39x11', color: 'Gray', imageURL: 'https://www.ikea.com/us/en/images/products/grimsbu-bed-frame-gray__0749251_pe747239_s5.jpg?f=xl' }),
     Product.create({ name: 'Queen Bed', price: 300, weight: 250, size: '88x63x47', color: 'Pink', imageURL: 'https://www.ikea.com/us/en/images/products/idanaes-upholstered-bed-frame-gunnared-pale-pink__0953727_pe802887_s5.jpg?f=xl' }),
     Product.create({ name: 'Gaming Chair', price: 130, weight: 60, size: '21x16x50', color: 'Red', imageURL: 'https://staticprod.site.flexispot.com/cdn-cgi/image/dpr=1,format=webp,w=824,h=706/https://staticprod.site.flexispot.com/flexispot/catalog/product/g/c/gc02-br-1.jpg' }),

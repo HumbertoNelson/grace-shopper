@@ -71,6 +71,7 @@ img {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 200px;
+    padding-bottom: 250px;
   }
 
 
@@ -92,11 +93,16 @@ img {
 #new-product {
   color: rgb(13, 13, 99);
   border: 1px solid black;
-  width: 50%;
+  width: 40%;
   background-color: orange;
   padding: 10px;
+  position: relative;
 }
 
 #create-button {
   padding-left: 40%;
+}
+
+.input-field {
+  width: 70%;
 }

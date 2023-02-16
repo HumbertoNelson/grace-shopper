@@ -21,7 +21,7 @@ const Products = () => {
             <li className='product-item'key = {product.id}>
               <img src={product.imageURL}></img>
               <p id='product-name'>{product.name}</p>
-              <p>Price: $${product.price}</p>
+              <p>Price: ${product.price}</p>
               <p>Weight: {product.weight} Pounds</p>
               <p>Size: {product.size}</p>
               <p>Color: {product.color}</p>
