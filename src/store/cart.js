@@ -1,8 +1,11 @@
 import axios from 'axios';
 
-const cart = (state = { lineItems: [] }, action)=> {
-  if(action.type === 'SET_CART' || action.type === 'REMOVE_ITEM' || action.type === 'ADD_ITEM' || action.type === 'CREATE_ORDER'){
+const cart = (state = { lineItems: [] }, action) => {
+  if (action.type === 'SET_CART') {
     return action.cart;
+  }
+  if (action.type === 'ADD_ITEM' || action.type === 'REMOVE_ITEM') {
+    return { ...state, lineItems: action.cart.lineItems.sort((a,b) => a.createdAt.localeCompare(b.createdAt)) }
   }
   return state;
 };
