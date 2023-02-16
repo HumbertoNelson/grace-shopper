@@ -1,3 +1,4 @@
+
 body {
   font-family: sans-serif;
   background-color: whitesmoke
@@ -24,6 +25,7 @@ li {
   list-style-type: none;
 }
 
+
 img {
   max-width: 150px;
   max-height: 150px;
@@ -36,7 +38,7 @@ img {
   margin: 1em;
   gap: 20px;
   border: 1px black solid;
-  width: 40%;
+  width: 60%;
   padding: 20px;
   height: 150px;
 }
@@ -102,8 +104,6 @@ img {
   width: 70%;
 }
 
-/* Single product page */
-
 .product-page-container {
   margin: 40px auto 0 auto;
   width: 80%;
@@ -121,4 +121,16 @@ ul.reviews-container {
 .review-form input,
 .review-form button {
   margin: 10px 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 1em;
+  border: 1px black solid;
+  width: 350px;
+  padding: 20px;
+  height: auto;
+  gap: 8px;
 }
