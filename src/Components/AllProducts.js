@@ -1,36 +1,37 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import ReviewForm from "./ReviewForm";
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../store';
+import { fetchProducts } from '../store';
+import ProductForm from './ProductForm';
+import { Link } from 'react-router-dom';
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { auth } = useSelector(state => state);
+  const { products } = useSelector(state => state.products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const result = await axios("/api/products");
-      setProducts(result.data);
-    };
-    fetchProducts();
-  }, []);
-
+    dispatch(fetchProducts());
+    },[])
+    
   return (
     <div>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <Link to={`/products/${product.id}`}> {product.name}</Link>
-            <p>Price: {product.price}</p>
-            <p>Weight: {product.weight}</p>
-            <p>Size: {product.size}</p>
-            <p>Color: {product.color}</p>
-            <img src={product.imageUrl}></img>
-          </li>
-        ))}
-      </ul>
-      <hr></hr>
+    <ul className="product-container">
+      {products && products.map((product) => (
+        <li className='product-item'key = {product.id}>
+          <img src={product.imageURL}></img>
+          <Link to={`/products/${product.id}`}><p id='product-name'>{product.name}</p></Link>
+          <p>Price: ${product.price}</p>
+          <p>Weight: {product.weight} Pounds</p>
+          <p>Size: {product.size}</p>
+          <p>Color: {product.color}</p>
+          { auth.id ? <button onClick={() => dispatch(addItem(product))} id='Add Button'>Add To Cart</button> : <Link to="/">Please login to add to cart</Link>}
+        </li>
+      ))}
+    </ul>
+    { auth.isAdmin ? <ProductForm /> : ''}
     </div>
   );
-};
+}
 
 export default Products;

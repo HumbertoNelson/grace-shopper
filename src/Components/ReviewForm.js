@@ -1,34 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { addReview } from "../store/reviews";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addReview } from "../store";
 
 const ReviewForm = () => {
-  const dispatch = useDispatch();
-  const { auth } = useSelector((state) => state);
+  const { auth } = useSelector(state => state);
   const { id } = useParams();
-  const [review, setReview] = useState({});
-
-  console.log(review);
+  const dispatch = useDispatch();
+  const [review, setReview] = useState({
+    review: '',
+  });
 
   const onChange = (ev) => {
-    setReview({ ...review, [ev.target.name]: ev.target.value });
+    const { name, value } = ev.target;
+    setReview({ ...review, [name]: value });
   };
-
-  useEffect(() => {
-    const reviewForm = () => {
-      setReview({
-        review: "",
-        productId: id,
-        userId: auth.id,
-      });
-    };
-    reviewForm();
-  }, []);
 
   const onSumbit = (ev) => {
     ev.preventDefault();
-    dispatch(addReview(review));
+    dispatch(addReview({...review, userId: auth.id, productId: id }));
   };
 
   return (

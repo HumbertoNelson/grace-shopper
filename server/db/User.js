@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, TEXT, UUID, UUIDV4 } = conn.Sequelize;
+const { STRING, TEXT, UUID, UUIDV4, BOOLEAN } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT } = process.env;
@@ -37,6 +37,11 @@ const User = conn.define('user', {
     type: TEXT,
     allowNull: true,
   },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
+    allowNull: false
+  }
 });
 
 User.prototype.createOrder = async function () {
@@ -89,32 +94,31 @@ User.prototype.getOrders = async function() {
   return orders;
 };
 
-User.prototype.addToCart = async function ({ product, quantity }) {
+User.prototype.addToCart = async function (product) {
   const cart = await this.getCart();
   const lineItem = cart.lineItems.find(
     (lineItem) => lineItem.productId === product.id
   );
-
   if (lineItem) {
-    lineItem.quantity += quantity;
+    lineItem.quantity += product.quantity;
     await lineItem.save();
   } else {
     await conn.models.lineItem.create({
       orderId: cart.id,
       productId: product.id,
-      quantity,
+      quantity: product.quantity,
     });
   }
 
   return this.getCart();
 };
 
-User.prototype.removeFromCart = async function ({ product, quantityToRemove }) {
+User.prototype.removeFromCart = async function (product) {
   const cart = await this.getCart();
   const lineItem = cart.lineItems.find(
     (lineItem) => lineItem.productId === product.id
   );
-  lineItem.quantity -= quantityToRemove;
+  lineItem.quantity -= product.quantity;
 
   if (lineItem.quantity > 0) {
     await lineItem.save();

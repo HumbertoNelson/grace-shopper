@@ -1,15 +1,26 @@
 import axios from 'axios';
 
-const cart = (state = { lineItems: [] }, action)=> {
-  if(action.type === 'SET_CART'){
+const cart = (state = { lineItems: [] }, action) => {
+  if (action.type === 'SET_CART' || action.type === 'CREATE_ORDER') {
     return action.cart;
   }
-  if(action.type === 'REMOVE_ITEM'){
-    return {...state, lineItems: state.lineItems.filter(lineItem => lineItem.productId !== action.productId)};
+  if (action.type === 'ADD_ITEM' || action.type === 'REMOVE_ITEM') {
+    return { ...state, lineItems: action.cart.lineItems.sort((a,b) => a.createdAt.localeCompare(b.createdAt)) }
   }
   return state;
 };
 
+export const createOrder = (order)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.post('/api/orders', {order}, {
+      headers: {
+        authorization: token
+      }
+    });
+    dispatch({ type: 'CREATE_ORDER', cart: {lineItems: []}});
+  };
+};
 
 export const fetchCart = ()=> {
   return async(dispatch)=> {
@@ -35,5 +46,16 @@ export const removeItem = (item)=> {
   };
 };
 
+export const addItem = (item)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.post('/api/orders/cart', {...item, quantity: 1}, {
+      headers: {
+        authorization: token
+      }
+    });
+    dispatch({ type: 'ADD_ITEM', cart: response.data });
+  };
+};
 
 export default cart;

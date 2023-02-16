@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import ProfileForm from './ProfileForm';
 
@@ -7,7 +7,7 @@ const Profile = ()=> {
 
   return (
     <>
-      <div>
+      <div className='profile'>
         <h1>Profile</h1>
         <pre>
           {

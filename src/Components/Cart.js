@@ -1,22 +1,20 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store';
-import { Link } from 'react-router-dom';
-import { removeItem } from '../store';
+import { addItem, removeItem, createOrder } from '../store';
 
 const Cart = ()=> {
   const { cart } = useSelector(state => state);
   const dispatch = useDispatch();
-  
+
   return (
     <div>
       <h1>Cart</h1>
-      <pre>
+      {/* <pre>
         {
           JSON.stringify(cart, null, 2)
         }
       </pre> 
-      {/* //leaving this code in here as it's useful to look at cart when editing this view  */}
+      //leaving this code in here as it's useful to look at cart when editing this view  */}
      
       <ul className="cart-container">
         {cart.lineItems.map((item) => (
@@ -26,12 +24,16 @@ const Cart = ()=> {
             <div>
               Quantity: {item.quantity}
             </div>
-            <button onClick={() => dispatch(removeItem(item))} id="deleteButton">
-              X
+            <button onClick={() => dispatch(removeItem(item.product))} id="deleteButton">
+              -
+            </button>
+            <button onClick={() => dispatch(addItem(item.product))} id="addButton">
+              +
             </button>
           </li>
         ))}
       </ul>
+      <button onClick={() => dispatch(createOrder(cart))}>Place Order</button> 
     </div>
   );
 };

@@ -3,27 +3,44 @@ const app = express.Router();
 const { Product } = require("../db");
 const Review = require("../db/Review");
 
-app.get("/", async (req, res, next) => {
+app.get('/', async(req, res, next)=> {
   try {
     const products = await Product.findAll();
     res.send(products);
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not fetch products",
+      error: err.message,
+    });
+  }
+});
+
+app.post('/', async(req, res, next) => {
+  try{
+    const product = await Product.create(req.body);
+    res.status(201).json(product);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not create product",
+      error: err.message,
+    });
   }
 });
 
 app.get("/:id", async (req, res, next) => {
   try {
-    const singleProduct = await Product.findByPk(req.params.id, {
+    const product = await Product.findByPk(req.params.id, {
       include: Review,
     });
-    res.send(singleProduct);
-  } catch (ex) {
-    next(ex);
+    res.send(product);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not fetch product",
+      error: err.message,
+    });
   }
 });
 
-//Finds all reviews for the single product
 app.get("/:id/reviews", async (req, res, next) => {
   try {
     const reviews = await Review.findAll({
@@ -32,8 +49,11 @@ app.get("/:id/reviews", async (req, res, next) => {
       },
     });
     res.send(reviews);
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not fetch reviews",
+      error: err.message,
+    });
   }
 });
 
@@ -41,8 +61,11 @@ app.post("/:id/reviews", async (req, res, next) => {
   try {
     const newReview = await Review.create(req.body);
     res.send(newReview);
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not create review",
+      error: err.message,
+    });
   }
 });
 

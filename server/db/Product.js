@@ -47,6 +47,7 @@ const Product = conn.define("product", {
     allowNull: false,
     validate: {
       notEmpty: true,
+      isUrl: true,
     },
   },
 });

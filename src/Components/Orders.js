@@ -1,11 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchOrders } from '../store';
 
 const Orders = ()=> {
   const { orders } = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, []);
 
   return (
-    <div>
+    <div className='orders'>
       <h1>Previous Orders</h1>
       <pre>
         {

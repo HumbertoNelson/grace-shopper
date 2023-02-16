@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../store/auth';
 
-const ProfileForm = ()=> {
+const ProfileForm = () => {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
@@ -43,7 +43,7 @@ const ProfileForm = ()=> {
   }
 
   return (
-    <div>
+    <div className="profile-form">
       <label>Username</label>
       <input
         name="username"

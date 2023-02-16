@@ -1,25 +1,30 @@
 const express = require("express");
 const app = express.Router();
 const { User } = require("../db");
-const Review = require("../db/Review");
 
 module.exports = app;
 
-app.get("/", async (req, res, next) => {
+app.get('/', async(req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.getOrders());
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not get orders",
+      error: err.message,
+    });
   }
 });
 
-app.post("/", async (req, res, next) => {
+app.post('/', async(req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.createOrder());
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not create order",
+      error: err.message,
+    });
   }
 });
 
@@ -27,8 +32,11 @@ app.get("/cart", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.getCart());
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not get cart",
+      error: err.message,
+    });
   }
 });
 
@@ -36,8 +44,11 @@ app.post("/cart", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.addToCart(req.body));
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not add item to cart",
+      error: err.message,
+    });
   }
 });
 
@@ -45,7 +56,10 @@ app.put("/cart", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.removeFromCart(req.body));
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not remove item from cart",
+      error: err.message,
+    });
   }
 });

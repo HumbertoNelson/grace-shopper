@@ -21,7 +21,7 @@ const Login = ()=> {
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={ login }>
+      <form onSubmit={ login } className='account-form'>
         <input
           placeholder='username'
           value = { credentials.username }
