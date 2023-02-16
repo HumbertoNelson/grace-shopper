@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const cart = (state = { lineItems: [] }, action) => {
-  if (action.type === 'SET_CART') {
+  if (action.type === 'SET_CART' || action.type === 'CREATE_ORDER') {
     return action.cart;
   }
   if (action.type === 'ADD_ITEM' || action.type === 'REMOVE_ITEM') {
