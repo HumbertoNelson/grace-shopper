@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../store';
 import { fetchProducts } from '../store';
+import ProductForm from './ProductForm';
 
 
 
 const Products = () => {
-    const { products } = useSelector(state => state);
+    const { products, auth } = useSelector(state => state);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,11 +15,12 @@ const Products = () => {
       }, [])
       
       return (
-        console.log(products),
-        <ul className='product-container'>
+        <div>
+        <ul className="product-container">
           {products.map((product) => (
-            <li className='product-item'key = {product.id}>{product.name}
-              <p>Price: {product.price}</p>
+            <li className="product-item" key = {product.id}>{product.name}
+              <img src={product.imageURL}/>
+              <p>Price: ${product.price}</p>
               <p>Weight: {product.weight}</p>
               <p>Size: {product.size}</p>
               <p>Color: {product.color}</p>
@@ -27,6 +29,8 @@ const Products = () => {
             </li>
           ))}
         </ul>
+        { auth.isAdmin ? <ProductForm /> : ''}
+        </div>
       );
     }
 

@@ -80,3 +80,15 @@ img {
   width: 30%;
   border: 2px dashed gray;
 }
+
+#new-product {
+  color: rgb(13, 13, 99);
+  border: 1px solid black;
+  width: 50%;
+  background-color: orange;
+  padding: 10px;
+}
+
+#create-button {
+  padding-left: 40%;
+}

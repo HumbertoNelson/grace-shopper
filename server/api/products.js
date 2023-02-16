@@ -3,12 +3,26 @@ const app = express.Router();
 const { Product } = require('../db');
 
 app.get('/', async(req, res, next)=> {
-    try {
+  try {
     const products = await Product.findAll();
-      res.send(products);
-    }
-    catch(ex){
-      next(ex);
+    res.send(products);
+  } catch (err) {
+    res.status(500).json({
+      message: "Could not fetch products",
+      error: err.message,
+    });
+  }
+});
+
+  app.post('/', async(req, res, next) => {
+    try{
+      const product = await Product.create(req.body);
+      res.status(201).json(product);
+    } catch (err) {
+      res.status(500).json({
+        message: "Could not create product",
+        error: err.message,
+      });
     }
   });
 
