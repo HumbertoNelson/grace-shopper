@@ -44,32 +44,32 @@ const ProfileForm = () => {
 
   return (
     <div className="profile-form">
-      <label>Username</label>
+      <label><b>Username</b></label>
       <input
         name="username"
         defaultValue={inputs.username}
         onChange={handleChange}
       />
-      <label>Password</label>
+      <label><b>Password</b></label>
       <input
         type="password"
         name="password"
         defaultValue={inputs.password}
         onChange={handleChange}
       />
-      <label>First Name</label>
+      <label><b>First Name</b></label>
       <input
         name="firstName"
         defaultValue={inputs.firstName}
         onChange={handleChange}
       />
-      <label>Last Name</label>
+      <label><b>Last Name</b></label>
       <input
         name="lastName"
         defaultValue={inputs.lastName}
         onChange={handleChange}
       />
-      <label>Bio</label>
+      <label><b>Bio</b></label>
       <input
         name="bio"
         defaultValue={inputs.bio}
@@ -78,7 +78,7 @@ const ProfileForm = () => {
       <button onClick={handleSubmit}>
         Submit
       </button>
-      <div>
+      <div className='profile-update-message'>
         {message}
       </div>
     </div>
