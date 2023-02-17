@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchOrders } from '../store';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchOrders } from "../store";
 
-const Orders = ()=> {
-  const { orders } = useSelector(state => state);
+const Orders = () => {
+  const { orders } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const Orders = ()=> {
   }, []);
 
   return (
-    <div className='orders'>
+    <div className="orders">
       <h1>Previous Orders</h1>
       {console.log(orders.lineItems)}
       {/* <pre>
@@ -22,13 +22,24 @@ const Orders = ()=> {
       <ul className="order-container">
         {orders.map((order) => (
           <li className="order-item" key={order.id}>
-            <div>
-              Order created on {order.createdAt.slice(0,10)} at {order.createdAt.slice(11,16)} for:
+            <div className="Order-created-box">
+              <span className="Order-create-text">
+                {" "}
+                <h2>Order created on: </h2>
+              </span>
+              <h3> {order.createdAt.slice(0, 10)} </h3> <strong>at </strong>
+              <h3>{order.createdAt.slice(11, 16)} </h3>
+              <strong>for:</strong>
             </div>
-            <div>
+            <br></br>
+            <div className="items-ordered">
               {order.lineItems.map((item) => (
                 <div key={item.product.id}>
-                  <div>{item.product.name} ({item.quantity})</div>
+                  <div>
+                    <strong>
+                      {item.product.name} ({item.quantity})
+                    </strong>
+                  </div>
                 </div>
               ))}
             </div>
