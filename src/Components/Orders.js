@@ -6,6 +6,17 @@ const Orders = ()=> {
   const { orders } = useSelector(state => state);
   const dispatch = useDispatch();
 
+  let totalCost = 0;
+  const itemCost = (item) => {
+    const cost = item.quantity * item.product.price;
+    totalCost += cost;
+    return cost;
+  }
+
+  const reset = () => {
+    totalCost = 0;
+  }
+
   useEffect(() => {
     dispatch(fetchOrders());
   }, []);
@@ -13,12 +24,6 @@ const Orders = ()=> {
   return (
     <div className='orders'>
       <h1>Previous Orders</h1>
-      {console.log(orders.lineItems)}
-      {/* <pre>
-        {
-          JSON.stringify(orders, null, 2)
-        }
-      </pre> */}
       <ul className="order-container">
         {orders.map((order) => (
           <li className="order-item" key={order.id}>
@@ -28,9 +33,13 @@ const Orders = ()=> {
             <div>
               {order.lineItems.map((item) => (
                 <div key={item.product.id}>
-                  <div>{item.product.name} ({item.quantity})</div>
+                  <div>{item.product.name} ({item.quantity}) - ${itemCost(item)}</div>
                 </div>
               ))}
+            </div>
+            <div>
+              You paid a total of ${totalCost} for this order
+              {reset()}
             </div>
           </li>
         ))}

@@ -173,3 +173,15 @@ ul.reviews-container {
   height: auto;
   gap: 8px;
 }
+
+#cost {
+  font-size: large;
+  color: rgb(10, 57, 10);
+  padding-left: 100px;
+}
+
+#order-button {
+  padding: 20px;
+  font-size: large;
+  background-color: rgb(241, 221, 221);
+}
