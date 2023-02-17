@@ -209,3 +209,10 @@ h2{
   font-size: large;
   background-color: rgb(241, 221, 221);
 }
+
+#total-cost {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

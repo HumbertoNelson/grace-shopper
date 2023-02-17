@@ -48,7 +48,8 @@ const Orders = () => {
                 </div>
               ))}
             </div>
-            <div>
+            <br></br>
+            <div id="total-cost">
               You paid a total of ${totalCost} for this order
               {reset()}
             </div>
