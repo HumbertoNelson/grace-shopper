@@ -163,6 +163,7 @@ ul.reviews-container {
 }
 
 .order-item {
+  background-color:rgb(250, 188, 73);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -172,6 +173,29 @@ ul.reviews-container {
   padding: 20px;
   height: auto;
   gap: 8px;
+}
+
+.order-created-box {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.items-ordered{
+  color: blue;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h3{
+  color:green;
+  
+}
+h2{
+  color:darkred
 }
 
 #cost {
