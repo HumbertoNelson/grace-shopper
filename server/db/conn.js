@@ -5,6 +5,14 @@ const config = {};
 if (process.env.QUIET) {
   config.logging = false;
 }
+if(process.env.DATABASE_URL){
+config.dialectOptions = {
+ssl: {
+rejectUnauthorized: false
+}
+};
+}
+
 const conn = new Sequelize(
   process.env.DATABASE_URL || "postgres://localhost/dpg-cjt720dhtt0c7397dtpg-a",
   config
