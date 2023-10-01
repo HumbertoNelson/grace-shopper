@@ -1,10 +1,13 @@
-const Sequelize = require('sequelize');
-const config = {
-};
+const Sequelize = require("sequelize");
+require("dotenv").config();
+const config = {};
 
-if(process.env.QUIET){
+if (process.env.QUIET) {
   config.logging = false;
 }
-const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/dpg-cjt720dhtt0c7397dtpg-a', config);
+const conn = new Sequelize(
+  process.env.DATABASE_URL || "postgres://localhost/dpg-cjt720dhtt0c7397dtpg-a",
+  config
+);
 
 module.exports = conn;
