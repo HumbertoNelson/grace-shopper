@@ -14,7 +14,7 @@ rejectUnauthorized: false
 }
 
 const conn = new Sequelize(
-  process.env.DATABASE_URL || "postgres://localhost/dpg-cjt720dhtt0c7397dtpg-a",
+  process.env.DATABASE_URL || "postgres://roomie_app_user:ZrRnedBrGWpgEcQc2ftbaaIoxemKfkU2@dpg-ckhgk34ldqrs73ag27lg-a.ohio-postgres.render.com/roomie_app",
   config
 );
 
